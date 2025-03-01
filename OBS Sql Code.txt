@@ -1,0 +1,75 @@
+USE [master]
+
+USE OBS
+GO
+/****** Object:  Table [dbo].[Lectures]    Script Date: 24.12.2023 14:18:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Lectures](
+	[Lecture] [int] IDENTITY(1,1) NOT NULL,
+	[LectureName] [varchar](250) NOT NULL,
+	[Lecturer] [varchar](50) NOT NULL,
+	[LectureCode] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Lectures] PRIMARY KEY CLUSTERED 
+(
+	[Lecture] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Selections]    Script Date: 24.12.2023 14:18:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Selections](
+	[SelectionID] [int] IDENTITY(1,1) NOT NULL,
+	[StudentNumber] [varchar](50) NULL,
+	[CourseCode] [varchar](50) NULL,
+ CONSTRAINT [PK_Selections] PRIMARY KEY CLUSTERED 
+(
+	[SelectionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Students]    Script Date: 24.12.2023 14:18:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Students](
+	[StudentID] [int] IDENTITY(1,1) NOT NULL,
+	[StudentName] [varchar](50) NOT NULL,
+	[StudentNumber] [varchar](50) NOT NULL,
+	[StudentPassword] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
+(
+	[StudentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Lectures] ON 
+
+INSERT [dbo].[Lectures] ([Lecture], [LectureName], [Lecturer], [LectureCode]) VALUES (1, N'Data Structures', N'Çağatay Tülü', N'SEN201')
+INSERT [dbo].[Lectures] ([Lecture], [LectureName], [Lecturer], [LectureCode]) VALUES (2, N'Web Design and Programming', N'Fatih Kılıç', N'SEN213')
+INSERT [dbo].[Lectures] ([Lecture], [LectureName], [Lecturer], [LectureCode]) VALUES (3, N'Programming Languages', N'Çağatay Tülü', N'SEN211')
+INSERT [dbo].[Lectures] ([Lecture], [LectureName], [Lecturer], [LectureCode]) VALUES (4, N'Linear Algebra', N'Funda Mert', N'MAT211')
+SET IDENTITY_INSERT [dbo].[Lectures] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Selections] ON 
+
+INSERT [dbo].[Selections] ([SelectionID], [StudentNumber], [CourseCode]) VALUES (6, N'0001', N'MAT211')
+INSERT [dbo].[Selections] ([SelectionID], [StudentNumber], [CourseCode]) VALUES (7, N'0001', N'SEN213')
+SET IDENTITY_INSERT [dbo].[Selections] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Students] ON 
+
+INSERT [dbo].[Students] ([StudentID], [StudentName], [StudentNumber], [StudentPassword]) VALUES (1, N'Ömer Ayana', N'0001', N'1234')
+INSERT [dbo].[Students] ([StudentID], [StudentName], [StudentNumber], [StudentPassword]) VALUES (2, N'Selçuk Tokgöz', N'0002', N'1234')
+SET IDENTITY_INSERT [dbo].[Students] OFF
+GO
+USE [master]
+GO
+ALTER DATABASE [OBS] SET  READ_WRITE 
+GO
