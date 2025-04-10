@@ -1,0 +1,111 @@
+@model List<Template.Models.Selection>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <div class="container">
+        <form method="post" onsubmit="return checkAndConfirm()" action="/Home/Add?StudentNumber=@ViewBag.studentNumber">
+            <div class="row">
+                <div class="col-lg-12">
+                    <select required class="form-control" name="CourseCode" id="CourseCode">
+                        <option selected disabled value="">
+                            Choose a lecture
+                        </option>
+                        @foreach (Template.Models.Lecture lecture in ViewBag.Lectures)
+                        {
+                            <option value="@lecture.LectureCode">
+                                @lecture.LectureCode    @lecture.LectureName (@lecture.Lecturer)
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <button class="btn btn-success btn-block" type="submit">Add Lecture</button>
+                </div>
+            </div>
+        </form>
+        @if (ViewBag.error != null)
+        {
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 style="color:red">@ViewBag.error</h3>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table">
+                    <tr>
+                        <th>
+                            Selection ID
+                        </th>
+                        <th>
+                            Student Number
+                        </th>
+                        <th>
+                            Lecture Code
+                        </th>
+                    </tr>
+                    @foreach (Template.Models.Selection selection in Model)
+                    {
+                        <tr>
+                            <td>
+                                @selection.SelectionID
+                            </td>
+                            <td>
+                                @selection.StudentNumber
+                            </td>
+                            <td>
+                                @selection.CourseCode
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" href="/Home/Remove?SelectionID=@selection.SelectionID">Remove Course</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                Total Course:  @Model.Count
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkAndConfirm() {
+                var total = parseInt(@Model.Count);
+                if (total < 3)
+                    return confirm('Are you sure to add?');
+                else {
+                    alert("You can select at most 3 lectures!!");
+                    return false;
+                }
+        }
+    </script>
+</body>
+</html>
