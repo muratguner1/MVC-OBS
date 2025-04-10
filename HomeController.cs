@@ -8,7 +8,7 @@ namespace Template.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        
         OBSEntities obs = new OBSEntities();
         public ActionResult Index(string studentNumber, string error = null)
         {
